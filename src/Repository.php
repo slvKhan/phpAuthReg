@@ -1,14 +1,16 @@
 <?php
 
 namespace App;
+require __DIR__.'/../vendor/autoload.php';
+use PDO;
 
 class Repository
 {
   private $pdo;
 
-  public function __construct($pdo)
+  public function __construct()
   {
-    $this->pdo = $pdo;
+    $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=users_db', 'sandy', 'qwe');
   }
 
   public function save($user)
