@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>Регистрация</title>
+</head>
+<body>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-sm-5 col-12 mx-auto mt-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Регистрация</h5>
+            <form action="/users" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Логин</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="login">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Телефон</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="" name="phone">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Пароль</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Повторите пароль</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+              </div>
+              <div class="form-group">
+              <label for="customFileLangHTML">Прикрепите файл</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFileLangHTML" name="image_file">
+                  <label class="custom-file-label" for="customFileLangHTML" data-browse="Файл">jpeg, png, gif</label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary col-12 mt-3">Зарегестрироваться</button>
+            </form>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body text-center">
+             <span>Уже есть аккаунт? <a href="/">Войти</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+  <script>
+    addEventListener('load', function() {
+      bsCustomFileInput.init();
+    });
+  </script>
+</body>
+</html>

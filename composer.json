@@ -1,0 +1,14 @@
+{
+    "name": "sandy/test-auto",
+    "authors": [
+        {
+            "name": "Andador",
+            "email": "slayer.han1997@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {"App\\": "src/"}
+    }
+}
+
