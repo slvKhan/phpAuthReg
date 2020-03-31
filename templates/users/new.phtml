@@ -15,28 +15,28 @@
             <h5 class="card-title">Регистрация</h5>
             <form action="/users" method="post" enctype="multipart/form-data">
               <div class="form-group">
-                <label for="exampleInputEmail1">Логин</label>
+                <label for="exampleInputEmail1">Логин*</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="login">
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
+                <label for="exampleInputEmail1">Email*</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
 
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Телефон</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="" name="phone">
+                <input type="tel" name="phone" id="phone" class="form-control bfh-phone" data-format="+7 (ddd) ddd-dddd" value="" pattern="(\+[\d\ \(\)\-]{16})" />
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Пароль</label>
+                <label for="exampleInputPassword1">Пароль*</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" name="password">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Повторите пароль</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="exampleInputPassword1">Повторите пароль*</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password_confirm">
               </div>
               <div class="form-group">
-              <label for="customFileLangHTML">Прикрепите файл</label>
+              <label for="customFileLangHTML">Прикрепить файл</label>
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" id="customFileLangHTML" name="image_file">
                   <label class="custom-file-label" for="customFileLangHTML" data-browse="Файл">jpeg, png, gif</label>

@@ -2,11 +2,34 @@
 
 namespace App;
 
+use App\Errors;
+require __DIR__.'/../vendor/autoload.php';
+
 class Validator
 {
-  public function validate($userData)
+  public function validate($userData, $lang = 'ru')
   {
-    $errors = [];
-    return $errors;
+    $ResError = [];
+    $errMessage = new Errors($lang);
+    if (strlen($userData['login']) <= 2 || strlen($userData['login'] >= 12)) {
+      $ResError['login'] = $errMessage->get('login');
+    }
+    if (strpos($userData['email'], '@') === false || strlen($userData['email']) <= 4) {
+      $ResError['email'] = $errMessage->get('email');
+    }
+    if ($userData['phone'] !== '') {
+      if (strlen($userData['phone']) !== 12)
+      {
+        $ResError['phone'] = $errMessage->get('phone');
+      }
+    }
+    if (strlen($userData['password']) < 6) {
+      $ResError['password'] = $errMessage->get('password');
+    }
+    if ($userData['password'] !== $userData['password_confirm']) {
+      $ResError['password_confirm'] = $errMessage->get('math');
+    }
+
+    return $ResError;
   }
 }

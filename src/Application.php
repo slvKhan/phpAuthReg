@@ -16,6 +16,11 @@ class Application
   {
     $currentMethod = $_SERVER['REQUEST_METHOD'];
     $uri = $_SERVER['REQUEST_URI'];
+    if (strpos($uri, 'uploades') !== false) {
+      $filePath = __DIR__.'/..'.$uri;
+      $this->getImage($filePath);
+      return;
+    }
     $currentPath = "{$currentMethod}{$this->prettier($uri)}";
 
     if (!array_key_exists($currentPath, $this->handlers)) {
@@ -39,6 +44,13 @@ class Application
       return rtrim($path, '/');
     }
     return $path;
+  }
+
+  private function getImage($filepath)
+  { 
+    header("Content-Type: image/jpeg");
+    readfile($filepath);
+    exit();
   }
 
 }
