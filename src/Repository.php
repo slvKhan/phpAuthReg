@@ -10,7 +10,12 @@ class Repository
 
   public function __construct()
   {
-    $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=users_db', 'sandy', 'qwe');
+    $HOST_NAME = '127.0.0.1';
+    $DB_NAME = 'users_db';
+    $USER_NAME = 'sandy';
+    $PASSWORD = 'qwe';
+
+    $this->pdo = new PDO("mysql:host={$HOST_NAME};dbname={$DB_NAME}", $USER_NAME, $PASSWORD);
   }
 
   public function save($user)
@@ -36,8 +41,13 @@ class Repository
     $stmt = $this->pdo->prepare($query);
     $stmt->execute($params);
     $userData = $stmt->fetch();
-    return json_encode($userData);
+    if (!$userData) {
+      return null;
+    } 
+    return [
+      'login' => $userData['login'],
+      'password' => $userData['password'],
+    ];
   }
-
 
 }
