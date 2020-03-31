@@ -20,12 +20,13 @@ class Repository
 
   public function save($user)
   {
-    $query = "INSERT INTO `signup` (`login`, `user_phone`, `email`, `password`) VALUES (:login, :user_phone, :email, :password)";
+    $query = "INSERT INTO `signup` (`login`, `phone`, `email`, `password`) VALUES (:login, :phone, :email, :password)";
+    $hash = password_hash($user['password'], PASSWORD_ARGON2I);
     $params = [
       ':login' => $user['login'],
-      ':user_phone' => $user['phone'],
+      ':phone' => $user['phone'],
       ':email' => $user['email'],
-      ':password' => $user['password'],
+      ':password' => $hash,
     ];
     $stmt = $this->pdo->prepare($query);
     $stmt->execute($params);

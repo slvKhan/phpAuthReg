@@ -7,50 +7,21 @@
   <title>Главная</title>
 </head>
 <body>
-  <!-- <div class="container mt-5 ">
-    <div class="row ">
-      <div class="col-sm-5 col-12 mx-auto mt-5">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Войти</h5>
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email или логин</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Пароль</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-                
-              </div>
-              <button type="submit" class="btn btn-primary col-12 mt-3">Войти</button>
-            </form>
-          </div>
-        </div>
-        <div class="card mt-3">
-          <div class="card-body text-center">
-             <span>Еще нет аккаунта? <a href="/users/new">Зарегистрироваться!</a></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
+<?php if($currentUser) : ?>
 
   <div class="container mt-5">
     <div class="card col-sm-9 mx-auto">
       <div class="row">
-
         <div class="col-md-4">
           <!-- <img src="..." class="card-img" alt="..."> -->
           <svg class="bd-placeholder-img img-fluid mt-4 mb-4 " width="300" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200">
             <rect fill="#868e96" width="100%" height="100%"></rect>
             <text fill="#dee2e6" dy=".5em" x="25%" y="50%">Нет изображения</text>
           </svg>
-          <button type="submit" class="btn btn-primary col-12 mb-3">Выйти</button>
-
+          <form action="/sign_out" method="post">
+            <button type="submit" class="btn btn-primary col-12 mb-3">Выйти</button>
+          </form>
         </div>
-
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">Имя пользователя</h5>
@@ -68,9 +39,38 @@
         </div>
 
       </div>
-        
     </div>
   </div>
+<?php else: ?>
 
+   <div class="container mt-5 ">
+    <div class="row ">
+      <div class="col-sm-5 col-12 mx-auto mt-5">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Вход</h5>
+            <form action="/sign_in" method="post">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Логин</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="login">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Пароль</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+              </div>
+              <button type="submit" class="btn btn-primary col-12 mt-3">Войти</button>
+            </form>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body text-center">
+             <span>Еще нет аккаунта? <a href="/users/new">Зарегистрироваться!</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php endif; ?>
 </body>
 </html>
