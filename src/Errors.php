@@ -14,6 +14,7 @@ class Errors
       'password' => 'Вы ввели неккоректный пароль, пожалуйста введите другой.',
       'math' => 'Пароли не совпадают.',
       'file' => 'Данный тип файла не поддерживается.',
+      'alreadyTaken' => 'Такой пользователь уже существует!',
     ],
     'en' => [
       'empty' => 'This field cannot be empty',
@@ -23,6 +24,7 @@ class Errors
       'password' => 'Value is not a valid password, please enter again.',
       'math' => 'Password confirmation does not match to password.',
       'file' => 'Error loading the file, the file type is not supported.',
+      'alreadyTaken' => 'this user exists!',
     ]
   ];
 

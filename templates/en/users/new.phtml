@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Регистрация</title>
+  <title>Registration</title>
 </head>
 <body>
   <div class="container mt-3">
@@ -12,47 +12,55 @@
       <div class="col-sm-5 col-12 mx-auto mt-4">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title mb-4">Регистрация</h5>
+            <h5 class="card-title mb-4">Registration</h5>
             <form action="/users" method="post" enctype="multipart/form-data" data-form="sign-up">
               <div class="form-group">
-                <label for="InputLogin">Логин*</label>
+                <label for="InputLogin">Login*</label>
                 <input type="text" class="form-control" id="InputLogin" name="login">
+                <?= $alreadyTaken ?? null?>
+                <?= $loginError ?? null?>
               </div>
               <div class="form-group">
                 <label for="InputEmail1">Email*</label>
                 <input type="email" class="form-control" id="InputEmail1" name="email">
+                <?= $emailError ?? null ?>
               </div>
               <div class="form-group">
-                <label for="InputPhone">Телефон</label>
+                <label for="InputPhone">Phone</label>
                 <input type="tel" name="phone" id="InputPhone" class="form-control bfh-phone"/>
+                <? $phoneError ?? null ?>
               </div>
               <div class="form-group">
-                <label for="InputPassword1">Пароль*</label>
+                <label for="InputPassword1">Password*</label>
                 <input type="password" class="form-control" id="InputPassword1" name="password">
               </div>
+              <? $passwordError ?? null ?>
               <div class="form-group">
-                <label for="InputPassword2">Повторите пароль*</label>
+                <label for="InputPassword2">Password Confirmation*</label>
                 <input type="password" class="form-control" id="InputPassword2" name="password_confirm">
               </div>
+              <? $confirmError ?? null?>
               <div class="form-group">
-              <label for="customFileLangHTML">Прикрепить файл:</label>
-
+              <label for="customFileLangHTML">attach a file:</label>
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="customFileLangHTML" name="image_file">
-                  <label class="custom-file-label" for="customFileLangHTML" data-browse="Файл"><small class="form-text text-muted">Допустимые форматы: png, jpeg, gif</small></label>
+                  <input type="file" class="custom-file-input <?= $fileError ? ' is-invalid' : null?>" id="customFileLangHTML" name="image_file">
+                  <?= $fileError ? "<div class='invalid-feedback mb-3'>{$fileError}</div>" : null ?>
+                  <label class="custom-file-label" for="customFileLangHTML" data-browse="File"><small class="form-text text-muted">Acceptable formats: png, jpeg, gif</small></label>
                 </div>
-                <small class="form-text text-muted">Размер файла не должен превышать 10 Мб.</small>
+                <?= $fileError ? null : '<small class="form-text text-muted">The file size must not exceed 10 MB.</small>' ?>
               </div>
-              
-              <button type="submit" class="btn btn-primary col-12 mt-2" id='submitButton' disabled>Зарегестрироваться</button>
+              <button type="submit" class="btn btn-primary col-12 mt-2" id='submitButton' disabled>Sign Up</button>
             </form>
           </div>
         </div>
         <div class="card mt-3">
           <div class="card-body text-center">
-             <span>Уже есть аккаунт? <a href="/">Войти</a></span>
+             <span>Already have an account? <a href="/">Sign In</a></span>
           </div>
         </div>
+        <form action="/ru" method="post">
+          <button type="submit" class="btn col-3 btn-outline-info mt-3">Русский</button>
+        </form>
       </div>
     </div>
   </div>

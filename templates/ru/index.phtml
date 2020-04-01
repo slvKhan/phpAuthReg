@@ -23,6 +23,9 @@
           <form action="/sign_out" method="post">
             <button type="submit" class="btn btn-primary col-12 mb-3">Выйти</button>
           </form>
+          <form action="/en" method="post">
+          <button type="submit" class="btn col-12 btn-outline-info mt-2 mb-3">English</button>
+        </form>
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -53,14 +56,13 @@
             <form action="/sign_in" method="post">
               <div class="form-group">
                 <label for="exampleInputEmail1">Логин</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="login">
-                <?= $errorLogin ?? null ?>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <input type="text" class="form-control <?= $errorLogin ? ' is-invalid' : null?>" id="exampleInputEmail1" name="login">
+                <?= $errorLogin ? "<div class='invalid-feedback'>{$errorLogin}</div>" : null ?>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Пароль</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
-                <?= $errorPassword ?? null ?>
+                <input type="password" class="form-control<?= $errorPassword ? ' is-invalid' : null?>" id="exampleInputPassword1" name="password">
+                <?= $errorPassword ? "<div class='invalid-feedback'>{$errorPassword}</div>" : null ?>
               </div>
               <button type="submit" class="btn btn-primary col-12 mt-3">Войти</button>
             </form>
@@ -71,6 +73,9 @@
              <span>Еще нет аккаунта? <a href="/users/new">Зарегистрироваться!</a></span>
           </div>
         </div>
+        <form action="/en" method="post">
+          <button type="submit" class="btn col-3 btn-outline-info mt-3">English</button>
+        </form>
       </div>
     </div>
   </div>

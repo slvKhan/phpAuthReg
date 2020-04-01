@@ -17,7 +17,8 @@
       passwordConfirmation: 'Password confirmation does not match to password.'
     },
   }
-  const lang = navigator.language || navigator.userLanguage;
+  const lang = document.querySelectorAll('html')[0]['lang'];
+  console.log(lang);
   const errorMessages = errorLang[lang];
 
   const state = {

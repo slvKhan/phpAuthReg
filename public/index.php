@@ -5,10 +5,18 @@ use App\Repository;
 require __DIR__.'/../vendor/autoload.php';
 
 session_start();
-
 $app = new Application();
-$template = new Template(__DIR__.'/../templates/');
+$lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'ru';
+$template = new Template(__DIR__.'/../templates/'.$lang.'/');
 
+$app->route('POST', '/en', function() {
+  $_SESSION['lang'] = 'en';
+  header("Location: http://test/");
+});
+$app->route('POST', '/ru', function() {
+  $_SESSION['lang'] = 'ru';
+  header("Location: http://test/");
+});
 
 $app->route('GET', '/', function () use($template) {
   $params = [
@@ -24,7 +32,7 @@ $app->route('GET', '/', function () use($template) {
 
 $app->route('POST', '/sign_in', function () {
   $repo = new Repository();
-  $errors = new App\Errors();
+  $errors = new App\Errors($_SESSION['lang']);
   $user = $_POST;
   if ($user['login'] === '') {
     $_SESSION['errorLogin'] = $errors->get('empty');
@@ -54,17 +62,26 @@ $app->route('POST', '/sign_out', function () use ($template) {
 });
 
 $app->route('GET', '/users/new', function () use ($template) {
-  return $template->render('users/new.phtml');
+  $keys = ['alreadyTaken', 'loginError', 'passwordError', 'emailError', 'phoneError', 'confirmError', 'fileError'];
+  $params = [];
+  foreach ($keys as $key) {
+    $params[$key] = isset( $_SESSION[$key]) ? $_SESSION[$key] : null;
+    $_SESSION[$key] = null;
+  }
+  return $template->render('users/new.phtml', $params);
 });
 
 $app->route('POST', '/users', function () use ($template) {
   $user = $_POST;
-  $validator = new App\Validator();
+  $validator = new App\Validator($_SESSION['lang']);
   
   $errors = $validator->validate($user);
   if (count($errors) !== 0) {
-    print_r($errors);
-    return $template->render('users/new.phtml');
+    foreach ($errors as $key => $value) {
+      $_SESSION[$key] = $value;
+    }
+    header("Location: http://test/users/new");
+    return;
   }
   $repo = new Repository();
   $oldUser = $repo->find($user);
@@ -74,7 +91,10 @@ $app->route('POST', '/users', function () use ($template) {
     return $template->render('users/succes.phtml');
   } else {
     //the user exists
-    echo 'такой пользователь существует!';
+    $errors = new App\Errors($_SESSION['lang']);
+    $_SESSION['alreadyTaken'] = $errors->get('alreadyTaken');
+    header("Location: http://test/users/new");
+    return;
   }
 });
 
