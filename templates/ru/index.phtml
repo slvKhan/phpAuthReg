@@ -29,15 +29,15 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title"><?= $userData['login'] ?></h5>
+            <h5 class="card-title"><?= htmlspecialchars($userData['login']) ?></h5>
             <table class="table">
               <tr>
                 <td>Телефон</td>
-                <td><?= $userData['phone'] ?></td>
+                <td><?= htmlspecialchars($userData['phone']) ?></td>
               </tr>
               <tr>
                 <td>email</td>
-                <td><?= $userData['email'] ?></td>
+                <td><?= htmlspecialchars($userData['email']) ?></td>
               </tr>
             </table>
           </div>
