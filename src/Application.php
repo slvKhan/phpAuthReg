@@ -5,6 +5,9 @@ namespace App;
 class Application
 {
   private $handlers = [];
+  private const ERROR_404 = '<h1>404 Not Found</h1>
+  <p>The resource could not be found.</p>
+  <a href="http://test/">http://test/</a>';
 
   public function route($method, $path, $handler)
   {
@@ -20,12 +23,14 @@ class Application
       $filePath = __DIR__.'/..'.$uri;
       $this->getImage($filePath);
     }
+    if (strpos($uri, 'scripts') !== false) {
+      $filePath = __DIR__.'/../public'.$uri;
+      $this->getScript($filePath);
+    }
     $currentPath = "{$currentMethod}{$this->prettier($uri)}";
 
     if (!array_key_exists($currentPath, $this->handlers)) {
-      echo '<h1>404 Not Found</h1>
-      <p>The resource could not be found.</p>
-      <a href="http://test/">http://test/</a>';
+      echo self::ERROR_404;
       return;
     }
     
@@ -50,6 +55,13 @@ class Application
   private function getImage($filepath)
   { 
     header("Content-Type: image/jpeg");
+    readfile($filepath);
+    exit();
+  }
+
+  private function getScript($filepath)
+  {
+    header("Content-Type: application/x-javascript");
     readfile($filepath);
     exit();
   }

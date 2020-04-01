@@ -8,7 +8,7 @@ session_start();
 
 $app = new Application();
 $template = new Template(__DIR__.'/../templates/');
-$repo = new Repository();
+
 
 $app->route('GET', '/', function () use($template) {
   $params = [
@@ -22,7 +22,8 @@ $app->route('GET', '/', function () use($template) {
   return $template->render('index.phtml', $params);
 });
 
-$app->route('POST', '/sign_in', function () use ($repo) {
+$app->route('POST', '/sign_in', function () {
+  $repo = new Repository();
   $errors = new App\Errors();
   $user = $_POST;
   if ($user['login'] === '') {
@@ -56,7 +57,7 @@ $app->route('GET', '/users/new', function () use ($template) {
   return $template->render('users/new.phtml');
 });
 
-$app->route('POST', '/users', function () use ($repo, $template) {
+$app->route('POST', '/users', function () use ($template) {
   $user = $_POST;
   $validator = new App\Validator();
   
@@ -65,6 +66,7 @@ $app->route('POST', '/users', function () use ($repo, $template) {
     print_r($errors);
     return $template->render('users/new.phtml');
   }
+  $repo = new Repository();
   $oldUser = $repo->find($user);
   if (!$oldUser) {
     //the user does not exist
