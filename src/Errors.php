@@ -7,6 +7,7 @@ class Errors
   private $lang;
   private $errMessages = [
     'ru' => [
+      'empty' => 'Поле не может быть пустым.',
       'login' => 'Вы ввели некорректный логин, пожалуйста введите другой.',
       'email' => 'Вы ввели некорректный email, пожалуйста введите другой.',
       'phone' => 'Вы ввели неккоректный телефон, пожалуйста введите другой.',
@@ -15,6 +16,7 @@ class Errors
       'file' => 'Данный тип файла не поддерживается.',
     ],
     'en' => [
+      'empty' => 'This field cannot be empty',
       'login' => 'Value is not a valid login, please enter again.',
       'email' => 'Value is not a valid email, please enter again.',
       'phone' => 'Value is not a valid phone, please enter again',
@@ -24,7 +26,7 @@ class Errors
     ]
   ];
 
-  public function __construct($lang)
+  public function __construct($lang = 'ru')
   {
     $this->lang = $lang;
   }
