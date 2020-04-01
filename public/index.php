@@ -100,7 +100,3 @@ $app->route('POST', '/users', function () use ($template) {
 
 
 $app->run();
-
-
-
-
