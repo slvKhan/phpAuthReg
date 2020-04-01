@@ -49,6 +49,7 @@ $app->route('GET', '/users/new', function () use ($template) {
 $app->route('POST', '/users', function () use ($repo, $template) {
   $user = $_POST;
   $validator = new App\Validator();
+  
   $errors = $validator->validate($user);
   if (count($errors) !== 0) {
     print_r($errors);
@@ -64,6 +65,7 @@ $app->route('POST', '/users', function () use ($repo, $template) {
     echo 'такой пользователь существует!';
   }
 });
+
 
 $app->run();
 

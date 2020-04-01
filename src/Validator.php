@@ -29,6 +29,15 @@ class Validator
     if ($userData['password'] !== $userData['password_confirm']) {
       $ResError['password_confirm'] = $errMessage->get('math');
     }
+    if ($_FILES['image_file']['name']) {
+      $MimeTypes = ['png', 'gif', 'jpg'];
+      $maxSize = 10485760;
+      $mime = pathinfo($_FILES['image_file']['name'], PATHINFO_EXTENSION);
+      $size = $_FILES['image_file']['size'];
+      if ((count($_FILES) > 1) || (!in_array($mime, $MimeTypes)) || ($size > $maxSize)) {
+        $ResError['file'] = $errMessage->get('file');
+      }
+    }
 
     return $ResError;
   }

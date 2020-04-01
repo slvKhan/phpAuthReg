@@ -12,6 +12,7 @@ class Errors
       'phone' => 'Вы ввели неккоректный телефон, пожалуйста введите другой.',
       'password' => 'Вы ввели неккоректный пароль, пожалуйста введите другой.',
       'math' => 'Пароли не совпадают.',
+      'file' => 'Данный тип файла не поддерживается.',
     ],
     'en' => [
       'login' => 'Value is not a valid login, please enter again.',
@@ -19,6 +20,7 @@ class Errors
       'phone' => 'Value is not a valid phone, please enter again',
       'password' => 'Value is not a valid password, please enter again.',
       'math' => 'Password confirmation does not match to password.',
+      'file' => 'Error loading the file, the file type is not supported.',
     ]
   ];
 

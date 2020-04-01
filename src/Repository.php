@@ -23,8 +23,8 @@ class Repository
     $query = "INSERT INTO `signup` (`login`, `phone`, `email`, `password`, `image`) VALUES (:login, :phone, :email, :password, :image)";
     $hash = password_hash($user['password'], PASSWORD_ARGON2I);
     $pathToSaveImage = null;
-    if ($_FILES['image_file']) {
-      $mime = substr($_FILES['image_file']['name'], -3, 3);
+    if ($_FILES['image_file']['name']) {
+      $mime = pathinfo($_FILES['image_file']['name'], PATHINFO_EXTENSION);
       $pathToSaveImage = 'uploades/'.time().'.'.$mime;
       $this->saveImage($pathToSaveImage);
     }
@@ -70,12 +70,10 @@ class Repository
   private function saveImage($path)
   {
     $tmpFileName = $_FILES['image_file']['tmp_name'];
+    if (!file_exists(__DIR__.'/../uploades/')) {
+      mkdir(__DIR__.'/../uploades/');
+    }
     move_uploaded_file($tmpFileName, __DIR__.'/../'.$path);
-  }
-
-  private function getImage($user)
-  {
-
   }
 
 }

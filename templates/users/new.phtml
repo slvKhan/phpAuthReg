@@ -12,7 +12,7 @@
       <div class="col-sm-5 col-12 mx-auto mt-4">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Регистрация</h5>
+            <h5 class="card-title mb-4">Регистрация</h5>
             <form action="/users" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="exampleInputEmail1">Логин*</label>
@@ -36,13 +36,16 @@
                 <input type="password" class="form-control" id="exampleInputPassword1" name="password_confirm">
               </div>
               <div class="form-group">
-              <label for="customFileLangHTML">Прикрепить файл</label>
+              <label for="customFileLangHTML">Прикрепить файл:</label>
+
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" id="customFileLangHTML" name="image_file">
-                  <label class="custom-file-label" for="customFileLangHTML" data-browse="Файл">jpeg, png, gif</label>
+                  <label class="custom-file-label" for="customFileLangHTML" data-browse="Файл"><small class="form-text text-muted">Допустимые форматы: png, jpeg, gif</small></label>
                 </div>
+                <small class="form-text text-muted">Размер файла не должен превышать 10 Мб.</small>
               </div>
-              <button type="submit" class="btn btn-primary col-12 mt-3">Зарегестрироваться</button>
+              
+              <button type="submit" class="btn btn-primary col-12 mt-2">Зарегестрироваться</button>
             </form>
           </div>
         </div>

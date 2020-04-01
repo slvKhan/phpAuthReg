@@ -19,12 +19,13 @@ class Application
     if (strpos($uri, 'uploades') !== false) {
       $filePath = __DIR__.'/..'.$uri;
       $this->getImage($filePath);
-      return;
     }
     $currentPath = "{$currentMethod}{$this->prettier($uri)}";
 
     if (!array_key_exists($currentPath, $this->handlers)) {
-      echo 404;
+      echo '<h1>404 Not Found</h1>
+      <p>The resource could not be found.</p>
+      <a href="http://test/">http://test/</a>';
       return;
     }
     
