@@ -3,16 +3,13 @@
 namespace App;
 require __DIR__.'/../vendor/autoload.php';
 
-use App\Connection;
-use App\QueryBuilder;
-
 class Repository
 {
   private $db;
 
   public function __construct()
   {
-    $this->db = new QueryBuilder(Connection::make());
+    $this->db = new App\QueryBuilder(App\Connection::make());
   }
   
   public function save($user)

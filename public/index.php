@@ -7,11 +7,10 @@ require __DIR__.'/../vendor/autoload.php';
 session_start();
 
 //set language, default ru
-$app = new Application();
-$main = new Main();
 $lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'ru';
 $template = new Template(__DIR__.'/../templates/'.$lang.'/');
-
+$app = new Application();
+$main = new Main();
 
 //routes of lang setters
 $app->route('POST', '/en', function() {

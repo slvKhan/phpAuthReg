@@ -9,13 +9,20 @@ require __DIR__.'/../vendor/autoload.php';
 
 class Main
 {
+  private $language;
+  private $repo;
+  private $errorMassages;
+
+  public function __construct()
+  {
+    $this->language = $_SESSION['lang'];
+    $this->repo = new Repository();
+    $this->errorMassages = new Error($this->language);
+  }
+
   public function register($user)
   {
-    $language = $_SESSION['lang'];
-    $validator = new Validator($language);
-    $repo = new Repository();
-    $errMessages = new Errors($language);
-
+    $validator = new Validator($this->language, $this->errorMassages);
     $errors = $validator->validate($user);
     if (count($errors) !== 0) {
       foreach ($errors as $key => $value) {
@@ -25,14 +32,14 @@ class Main
       return false;
     }
     
-    $oldUser = $repo->find($user);
+    $oldUser = $this->repo->find($user);
     if (!$oldUser) {
       //the user does not exist
-      $repo->save($user);
+      $this->repo->save($user);
       return true;
     } else {
       //the user exists
-      $_SESSION['alreadyTaken'] = $errMessages->get('alreadyTaken');
+      $_SESSION['alreadyTaken'] = $this->errorMassages->get('alreadyTaken');
       header("Location: /users/new");
       return false;
     }
@@ -40,24 +47,21 @@ class Main
 
   public function authorization($user)
   {
-    $repo = new Repository();
-    $errors = new Errors($_SESSION['lang']);
-
     if ($user['login'] === '') {
-      $_SESSION['errorLogin'] = $errors->get('empty');
+      $_SESSION['errorLogin'] = $this->errorMassages->get('empty');
       return;
     }
-    $userData = $repo->find($user);
+    $userData = $this->repo->find($user);
     if (!$userData) {
-      $_SESSION['errorLogin'] = $errors->get('login');
+      $_SESSION['errorLogin'] = $this->errorMassages->get('login');
       return;
     } 
     if (password_verify($user['password'], $userData['password'])) {
       $_SESSION['user'] = $user;
-      $_SESSION['data'] = $repo->getUser($user['login']);
+      $_SESSION['data'] = $this->repo->getUser($user['login']);
       return;
     } else {
-      $_SESSION['errorPassword'] = $errors->get('password');
+      $_SESSION['errorPassword'] = $this->errorMassages->get('password');
       return;
     }
   }

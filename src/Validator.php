@@ -2,23 +2,23 @@
 
 namespace App;
 
-use App\Errors;
 require __DIR__.'/../vendor/autoload.php';
 
 class Validator
 {
   private $lang;
-  public function __construct($lang = 'ru')
+  private $errorMessagesTemp;
+  public function __construct($lang = 'ru', $errors)
   {
     $this->lang = $lang;
+    $this->errorMessagesTemp = $errors;
   }
 
   public function validate($userData)
   {
     $ResError = [];
-    $errMessage = new Errors($this->lang);
+    $errMessage = $this->errorMessagesTemp;
 
-    
     if (strlen($userData['login']) <= 2 || strlen($userData['login'] >= 12)) {
       $ResError['loginError'] = $errMessage->get('login');
     }
