@@ -18,6 +18,7 @@ class Validator
     $ResError = [];
     $errMessage = new Errors($this->lang);
 
+    
     if (strlen($userData['login']) <= 2 || strlen($userData['login'] >= 12)) {
       $ResError['loginError'] = $errMessage->get('login');
     }

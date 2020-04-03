@@ -1,4 +1,4 @@
-(function () {
+//(function () {
   const errorLang = {
     ru: {
       empty: 'Поле обязательно к заполению.',
@@ -17,10 +17,11 @@
       passwordConfirmation: 'Password confirmation does not match to password.'
     },
   }
+  
   const lang = document.querySelectorAll('html')[0]['lang'];
   console.log(lang);
   const errorMessages = errorLang[lang];
-
+ 
   const state = {
     fields: {
       login: '',
@@ -31,7 +32,7 @@
     },
     errors: {},
   }
-
+  
   const form = document.querySelector('[data-form="sign-up"]');
   const confirmPass = form.querySelector('#InputPassword2');
   const submitButton = form.querySelector('#submitButton');

@@ -27,6 +27,7 @@ class Application
       $filePath = __DIR__.'/../public'.$uri;
       $this->getScript($filePath);
     }
+    
     $currentPath = "{$currentMethod}{$this->prettier($uri)}";
 
     if (!array_key_exists($currentPath, $this->handlers)) {

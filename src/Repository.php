@@ -29,9 +29,9 @@ class Repository
       $this->saveImage($pathToSaveImage);
     }
     $params = [
-      ':login' => $user['login'],
-      ':phone' => $user['phone'],
-      ':email' => $user['email'],
+      ':login' => trim($user['login']),
+      ':phone' => trim($user['phone']),
+      ':email' => trim($user['email']),
       ':password' => $hash,
       ':image' => $pathToSaveImage,
     ];
