@@ -1,7 +1,6 @@
 <?php
 use App\Application;
 use App\Template;
-use App\Repository;
 use App\Main;
 require __DIR__.'/../vendor/autoload.php';
 
@@ -37,9 +36,9 @@ $app->route('GET', '/', function () use($template) {
   return $template->render('index.phtml', $params);
 });
 
-//authorization 
 $app->route('POST', '/sign_in', function () use ($main) {
   $main->authorization($_POST);
+  header("Location: /");
 });
 
 $app->route('POST', '/sign_out', function () use ($main) {

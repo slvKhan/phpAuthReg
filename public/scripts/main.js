@@ -1,4 +1,4 @@
-//(function () {
+(function () {
   const errorLang = {
     ru: {
       empty: 'Поле обязательно к заполению.',

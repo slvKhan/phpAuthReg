@@ -4,6 +4,7 @@ namespace App;
 use App\Repository;
 use App\Errors;
 use App\Validator;
+
 require __DIR__.'/../vendor/autoload.php';
 
 class Main
@@ -13,7 +14,7 @@ class Main
     $language = $_SESSION['lang'];
     $validator = new Validator($language);
     $repo = new Repository();
-    $errors = new Errors($language);
+    $errMessages = new Errors($language);
 
     $errors = $validator->validate($user);
     if (count($errors) !== 0) {
@@ -31,7 +32,7 @@ class Main
       return true;
     } else {
       //the user exists
-      $_SESSION['alreadyTaken'] = $errors->get('alreadyTaken');
+      $_SESSION['alreadyTaken'] = $errMessages->get('alreadyTaken');
       header("Location: /users/new");
       return false;
     }
@@ -44,22 +45,20 @@ class Main
 
     if ($user['login'] === '') {
       $_SESSION['errorLogin'] = $errors->get('empty');
-      header("Location: /");
       return;
     }
     $userData = $repo->find($user);
     if (!$userData) {
       $_SESSION['errorLogin'] = $errors->get('login');
-      header("Location: /");
       return;
     } 
     if (password_verify($user['password'], $userData['password'])) {
       $_SESSION['user'] = $user;
       $_SESSION['data'] = $repo->getUser($user['login']);
-      header("Location: /");
+      return;
     } else {
       $_SESSION['errorPassword'] = $errors->get('password');
-      header("Location: /");
+      return;
     }
   }
 
