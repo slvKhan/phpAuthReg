@@ -9,7 +9,7 @@ class Repository
 
   public function __construct()
   {
-    $this->db = new App\QueryBuilder(App\Connection::make());
+    $this->db = new QueryBuilder(Connection::make());
   }
   
   public function save($user)

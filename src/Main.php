@@ -17,7 +17,7 @@ class Main
   {
     $this->language = $_SESSION['lang'];
     $this->repo = new Repository();
-    $this->errorMassages = new Error($this->language);
+    $this->errorMassages = new Errors($this->language);
   }
 
   public function register($user)
