@@ -23,10 +23,6 @@ class Application
       $filePath = __DIR__.'/..'.$uri;
       $this->getImage($filePath);
     }
-    if (strpos($uri, 'scripts') !== false) {
-      $filePath = __DIR__.'/../public'.$uri;
-      $this->getScript($filePath);
-    }
     
     $currentPath = "{$currentMethod}{$this->prettier($uri)}";
 
@@ -56,13 +52,6 @@ class Application
   private function getImage($filepath)
   { 
     header("Content-Type: image/jpeg");
-    readfile($filepath);
-    exit();
-  }
-
-  private function getScript($filepath)
-  {
-    header("Content-Type: application/x-javascript");
     readfile($filepath);
     exit();
   }
